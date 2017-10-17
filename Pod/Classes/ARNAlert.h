@@ -12,9 +12,10 @@ typedef void (^ARNAlertBlock)(id resultObj);
 
 @interface ARNAlertObject : NSObject
 
-@property (nonatomic, copy) NSString     *title;
-@property (nonatomic, copy) NSString     *placeholder;
-@property (nonatomic, copy) ARNAlertBlock block;
+@property (nonatomic, copy) NSString      *title;
+@property (nonatomic, copy) NSString      *placeholder;
+@property (nonatomic)       UIKeyboardType keyboardType;
+@property (nonatomic, copy) ARNAlertBlock  block;
 
 @end
 
@@ -41,6 +42,7 @@ typedef void (^ARNAlertBlock)(id resultObj);
 
 // iOS7 is Max 2 Fields (1 : UIAlertViewStylePlainTextInput, 2 : UIAlertViewStyleLoginAndPasswordInput)
 - (void)addTextFieldWithPlaceholder:(NSString *)placeholder fillInText:(NSString *)text;
+- (void)addTextFieldWithPlaceholder:(NSString *)placeholder fillInText:(NSString *)text keyboardType:(UIKeyboardType)keyboardType;
 
 - (void)show;
 

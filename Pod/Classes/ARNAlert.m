@@ -126,6 +126,11 @@ static NSMutableArray   *alertQueueArray_  = nil;
 
 - (void)addTextFieldWithPlaceholder:(NSString *)placeholder fillInText:(NSString *)text
 {
+    [self addTextFieldWithPlaceholder:placeholder fillInText:text keyboardType:UIKeyboardTypeDefault];
+}
+
+- (void)addTextFieldWithPlaceholder:(NSString *)placeholder fillInText:(NSString *)text keyboardType:(UIKeyboardType)keyboardType
+{
     ARNAlertObject *alertObj = [ARNAlertObject new];
     
     if (placeholder) {
@@ -133,6 +138,9 @@ static NSMutableArray   *alertQueueArray_  = nil;
     }
     if (text) {
         alertObj.title = text;
+    }
+    if (keyboardType) {
+        alertObj.keyboardType = keyboardType;
     }
     
     if ([[self class] isiOS8orLater]) {
@@ -261,8 +269,9 @@ static NSMutableArray   *alertQueueArray_  = nil;
     
     [self.textFieldBlockArray enumerateObjectsUsingBlock:^(ARNAlertObject *alertObj, NSUInteger idx, BOOL *stop) {
         [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-            textField.placeholder = alertObj.placeholder;
-            textField.text = alertObj.title;
+            textField.placeholder  = alertObj.placeholder;
+            textField.text         = alertObj.title;
+            textField.keyboardType = alertObj.keyboardType;
         }];
     }];
     
@@ -369,8 +378,9 @@ static NSMutableArray   *alertQueueArray_  = nil;
     [self.textFieldBlockArray enumerateObjectsUsingBlock:^(ARNAlertObject *alertObj, NSUInteger idx, BOOL *stop) {
         UITextField *textField = [alertView textFieldAtIndex:idx];
         if (textField) {
-            textField.placeholder = alertObj.placeholder;
-            textField.text        = alertObj.title;
+            textField.placeholder  = alertObj.placeholder;
+            textField.text         = alertObj.title;
+            textField.keyboardType = alertObj.keyboardType;
         }
     }];
 }
